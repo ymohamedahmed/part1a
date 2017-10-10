@@ -8,5 +8,5 @@ where title<>'Skyfall (2012)' and keyword in(
     where title = 'Skyfall (2012)'
 )
 group by title
-order by total desc
+order by total desc, title asc 
 limit 10;

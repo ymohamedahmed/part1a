@@ -18,5 +18,4 @@ fun abs(x) = if x < 0 then ~1 * x else x
 (* takes a year in the digit form and adds a number of years to it
    raises an exception if the answer is out of the range
  *)
-
 fun addYears(year, x) = yearToDigits(x + digitsToYear(year))

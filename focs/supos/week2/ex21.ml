@@ -1,3 +1,4 @@
+(* Compute the value of x^n iteratively using a helper function *)
 fun power(x,n) =
     let fun helper(x,n,total) =
         if n = 0 then total

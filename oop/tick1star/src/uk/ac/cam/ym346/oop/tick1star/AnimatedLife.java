@@ -1,20 +1,31 @@
 package uk.ac.cam.ym346.oop.tick1star;
+
+import java.io.IOException;
+
 public class AnimatedLife{
     private int mWidth;
     private int mHeight;
     private boolean[][] mWorld;
     private Pattern mPattern; 
+    private OutputAnimatedGif mOutputGif;
+    private int mFrames;
 
-    public AnimatedLife(String format){
+    public AnimatedLife(String format, int noOfFrames, String output){
         mPattern = new Pattern(format);
         mHeight=mPattern.getHeight();
         mWidth=mPattern.getWidth();
+        mFrames = noOfFrames;
+        try {
+			mOutputGif = new OutputAnimatedGif(output);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         mWorld=new boolean[mHeight][mWidth];
         mPattern.initialise(mWorld);
     }
 
     public static void main(String[] args) throws java.io.IOException {
-       AnimatedLife al = new AnimatedLife(args[0]);
+       AnimatedLife al = new AnimatedLife(args[0], Integer.parseInt(args[1]), args[2]);
        al.play();
     }
 
@@ -98,11 +109,10 @@ public class AnimatedLife{
     }
 
     public void play() throws java.io.IOException {
-       int userResponse = 0;
-       while (userResponse != 'q') {
-          print();
-          userResponse = System.in.read();
-          nextGeneration();
-       }
+        for(int i = 0; i < mFrames; i++){
+            mOutputGif.addFrame(mWorld);
+            nextGeneration();
+        }
+        mOutputGif.close();
     }
 }

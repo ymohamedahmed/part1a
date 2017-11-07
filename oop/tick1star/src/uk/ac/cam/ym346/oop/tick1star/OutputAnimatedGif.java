@@ -1,6 +1,6 @@
 package uk.ac.cam.ym346.oop.tick1star;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,30 @@ public class OutputAnimatedGif {
 	}
 
 	private BufferedImage makeFrame(boolean[][] world) {
-	    // TODO: complete this method
+        BufferedImage image = new BufferedImage(900,900, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+		// Width and height per cell
+		int size = Math.min(image.getHeight()/world.length, image.getWidth()/world[0].length);
+		
+		for(int row = 0; row < world.length; row++) {
+			g.setColor(Color.GRAY);
+			for(int col = 0; col < world[row].length; col++) {
+				if(world[row][col]) {
+					g.setColor(Color.BLACK);
+				}
+				else {
+					g.setColor(Color.WHITE);
+				}
+				
+				g.fillRect(col*size,row*size, size, size);
+				g.setColor(Color.GRAY);
+				g.drawLine(col*size, row*size, col*size, (row*size)+size);
+			}
+			// draw horizontal line
+			g.drawLine(0, row*size, image.getWidth(), row*size);
+		}
+        g.dispose();
+		return image;
 	}
 	
 	public void addFrame(boolean[][] world) throws IOException {

@@ -1,4 +1,4 @@
-package uk.ac.cam.cl.gfxintro.crsid.tick1;
+package uk.ac.cam.cl.gfxintro.ym346.tick1;
 
 public class PointLight {
 

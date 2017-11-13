@@ -1,4 +1,4 @@
-package uk.ac.cam.cl.gfxintro.crsid.tick1;
+package uk.ac.cam.cl.gfxintro.ym346.tick1;
 
 public class Sphere extends SceneObject {
 
@@ -30,15 +30,15 @@ public class Sphere extends SceneObject {
 	}
 
 	/*
-	 * Calculate intersection of the sphere with the ray. If the ray starts inside the sphere,
-	 * intersection with the surface is also found.
+	 * Calculate intersection of the sphere with the ray. If the ray starts inside
+	 * the sphere, intersection with the surface is also found.
 	 */
 	public RaycastHit intersectionWith(Ray ray) {
 
 		// Get ray parameters
 		Vector3 O = ray.getOrigin();
 		Vector3 D = ray.getDirection();
-		
+
 		// Get sphere parameters
 		Vector3 C = position;
 		double r = radius;
@@ -47,12 +47,29 @@ public class Sphere extends SceneObject {
 		double a = D.dot(D);
 		double b = 2 * D.dot(O.subtract(C));
 		double c = (O.subtract(C)).dot(O.subtract(C)) - Math.pow(r, 2);
-		
-		// TODO: Determine if ray and sphere intersect - if not return an empty RaycastHit
-        // TODO: If so, work out any point of intersection
-        // TODO: Then return a RaycastHit that includes the object, ray distance, point, and normal vector
 
-		return new RaycastHit(); 
+		// TODO: Determine if ray and sphere intersect - if not return an empty
+		// RaycastHit
+		// TODO: If so, work out any point of intersection
+		// TODO: Then return a RaycastHit that includes the object, ray distance, point,
+		// and normal vector
+		double discriminant = Math.pow(b, 2) - (4 * a * c);
+		if (discriminant < 0) {
+			return new RaycastHit();
+		}
+		double s = 0;
+		double firstSolution = (-b + Math.sqrt(discriminant)) / (2 * a);
+		double secondSolution = (-b - Math.sqrt(discriminant)) / (2 * a);
+		if (firstSolution < 0 && secondSolution < 0) {
+			return new RaycastHit();
+		} else if (firstSolution < secondSolution) {
+			s = firstSolution;
+		} else {
+			s = secondSolution;
+		}
+		Vector3 position = O.add(D.scale(s));
+		return new RaycastHit(this, s, position, getNormalAt(position));
+		
 	}
 
 	// Get normal to surface at position

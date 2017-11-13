@@ -1,7 +1,7 @@
-package uk.ac.cam.cl.gfxintro.crsid.tick1;
+package uk.ac.cam.cl.gfxintro.ym346.tick1;
 
 public class Plane extends SceneObject {
-	
+
 	// Plane constants
 	private final double PLANE_KD = 0.9;
 	private final double PLANE_KS = 0.0;
@@ -24,24 +24,28 @@ public class Plane extends SceneObject {
 		this.phong_alpha = PLANE_ALPHA;
 		this.reflectivity = PLANE_REFLECTIVITY;
 	}
-	
+
 	// Intersect this plane with ray
 	@Override
 	public RaycastHit intersectionWith(Ray ray) {
 		// Get ray parameters
 		Vector3 O = ray.getOrigin();
 		Vector3 D = ray.getDirection();
-		
+
 		// Get plane parameters
 		Vector3 Q = this.point;
 		Vector3 N = this.normal;
 
 		// TODO: Calculate ray parameter s at intersection
 		// TODO: If intersection occurs behind camera, return empty RaycastHit;
-		//			otherwise return RaycastHit describing point of intersection
-
-		return new RaycastHit(); 
-}
+		// otherwise return RaycastHit describing point of intersection
+		double s = (point.subtract(O)).dot(N) / (D.dot(N));
+		if (s < 0) {
+			return new RaycastHit();
+		}else {
+			return new RaycastHit(this, s, O.add(D.scale(s)), N);
+		}
+	}
 
 	// Get normal to the plane
 	@Override

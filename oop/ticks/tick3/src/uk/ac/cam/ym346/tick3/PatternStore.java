@@ -35,12 +35,13 @@ public class PatternStore {
 		BufferedReader b = new BufferedReader(r);
 		String line = b.readLine();
 		while (line != null) {
+			System.out.println(line);
 			try {
 				Pattern pattern = new Pattern(line);
 				mPatterns.add(pattern);
-				if(mMapAuths.get(pattern.getAuthor())!=null) {
+				if (mMapAuths.get(pattern.getAuthor()) != null) {
 					mMapAuths.get(pattern.getAuthor()).add(pattern);
-				}else {
+				} else {
 					List<Pattern> authPat = new LinkedList<>();
 					authPat.add(pattern);
 					mMapAuths.put(pattern.getAuthor(), authPat);
@@ -79,9 +80,9 @@ public class PatternStore {
 			public int compare(Pattern p1, Pattern p2) {
 				int authComp = (p1.getAuthor()).compareTo(p2.getAuthor());
 				int nameComp = (p1.getName()).compareTo(p2.getName());
-				if(authComp!=0) {
+				if (authComp != 0) {
 					return authComp;
-				}else {
+				} else {
 					return nameComp;
 				}
 			}
@@ -91,23 +92,21 @@ public class PatternStore {
 
 	public List<Pattern> getPatternsByAuthor(String author) throws PatternNotFound {
 		// TODO: return a list of patterns from a particular author sorted by name
-		try {
-			List<Pattern> result = mMapAuths.get(author);
-			Collections.sort(result);
-			return result;
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<Pattern> result = mMapAuths.get(author);
+		if (result == null) {
 			throw new PatternNotFound();
 		}
+		Collections.sort(result);
+		return new LinkedList<Pattern>(result);
 	}
 
 	public Pattern getPatternByName(String name) throws PatternNotFound {
 		// TODO: Get a particular pattern by name
-		try {
-			return mMapName.get(name);
-		}catch(Exception e) {
+		Pattern result = mMapName.get(name);
+		if (result == null) {
 			throw new PatternNotFound();
 		}
+		return mMapName.get(name);
 
 	}
 
@@ -115,7 +114,7 @@ public class PatternStore {
 		// TODO: Get a sorted list of all pattern authors in the store
 		List<String> authors = new LinkedList<>(mMapAuths.keySet());
 		Collections.sort(authors);
-		return authors;		
+		return new LinkedList<String>(authors);
 	}
 
 	public List<String> getPatternNames() {
@@ -123,7 +122,7 @@ public class PatternStore {
 		// sorted by name
 		List<String> authors = new LinkedList<>(mMapName.keySet());
 		Collections.sort(authors);
-		return authors;		
+		return new LinkedList<String>(authors);
 	}
 
 }

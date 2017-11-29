@@ -3,6 +3,11 @@ package uk.ac.cam.ym346.tick3;
 public class PackedWorld extends World {
 	private long mWorld;
 
+	public PackedWorld(Pattern pattern) throws PatternFormatException {
+		super(pattern);
+		getPattern().initialise(this);
+	}
+
 	public PackedWorld(String pattern) throws Exception {
 		super(pattern);
 		getPattern().initialise(this);
@@ -10,9 +15,6 @@ public class PackedWorld extends World {
 			throw new Exception("World too big for packed long");
 		}
 
-	}
-	public PackedWorld(Pattern pattern) {
-		super(pattern);
 	}
 
 	@Override

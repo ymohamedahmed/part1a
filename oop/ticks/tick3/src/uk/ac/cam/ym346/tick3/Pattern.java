@@ -97,22 +97,6 @@ public class Pattern implements Comparable<Pattern> {
 		}
 
 	}
-	/*
-	public static void main(String[] args) {
-		//test cases 
-		Pattern pattern;
-		try {
-			pattern = new Pattern("");
-			pattern = new Pattern("SomeRandomString");
-			pattern = new Pattern("Glider:Richard Guy:20:20:1:");
-			pattern = new Pattern("Glider:Richard Guy:a:b:1:1:010 001 111");
-			pattern = new Pattern("Glider:Richard Guy:20:20:one:1:010 001 111");
-			pattern = new Pattern("Glider:Richard Guy:20:20:1:1:010 0a1 111");
-			System.out.println("testing");
-		} catch (PatternFormatException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	@Override
 	public int compareTo(Pattern p) {

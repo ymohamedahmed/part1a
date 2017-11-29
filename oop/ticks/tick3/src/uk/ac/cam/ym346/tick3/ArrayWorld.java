@@ -4,18 +4,16 @@ public class ArrayWorld extends World {
 
 	private boolean[][] mWorld;
 
-	public ArrayWorld(String serial) {
-		super(serial);
-		mWorld = new boolean[getHeight()][getWidth()];
-		try {
-			getPattern().initialise(this);
-		} catch (PatternFormatException e) {
-			e.printStackTrace();
-		}
-	}
-	public ArrayWorld(Pattern pattern) {
+	public ArrayWorld(Pattern pattern) throws PatternFormatException {
 		super(pattern);
 		mWorld = new boolean[getHeight()][getWidth()];
+		getPattern().initialise(this);
+	}
+
+	public ArrayWorld(String serial) throws PatternFormatException {
+		super(serial);
+		mWorld = new boolean[getHeight()][getWidth()];
+		getPattern().initialise(this);
 	}
 
 	@Override

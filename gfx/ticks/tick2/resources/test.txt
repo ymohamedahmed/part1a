@@ -1,0 +1,5 @@
+Vector3f Tx = new Vector3f(2 * delta_x,
+						heightmap[(int) (x + delta_x)][z] - heightmap[(int) (x - delta_x)][z], 0);
+				Vector3f Tz = new Vector3f(0, heightmap[x][(int) (z + delta_z)] - heightmap[x][(int) (z - delta_z)],
+						(int) (2 * delta_z));
+				Vector3f N = Tx.cross(Tz).normalize();

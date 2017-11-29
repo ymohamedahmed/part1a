@@ -4,16 +4,14 @@ public abstract class World {
 	private int mGeneration;
 	private Pattern mPattern;
 
-	public World(String pattern) {
-		try {
+	public World(String pattern) throws PatternFormatException {
 			this.mPattern = new Pattern(pattern);
-		} catch (PatternFormatException e) {
-			e.printStackTrace();
-		}
 	}
-	public World(Pattern pattern) {
+
+	public World(Pattern pattern) throws PatternFormatException {
 		this.mPattern = pattern;
 	}
+
 	public int getWidth() {
 		return mPattern.getWidth();
 	}
@@ -92,8 +90,5 @@ public abstract class World {
 		}
 		return nextCell;
 	}
-
-
-	
 
 }

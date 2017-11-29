@@ -13,7 +13,7 @@ public class GameOfLife {
 		mStore = ps;
 	}
 
-	public void play() throws IOException {
+	public void play() throws IOException, PatternFormatException {
 
 		String response = "";
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -49,18 +49,14 @@ public class GameOfLife {
 				} else {
 					mWorld = new PackedWorld(pattern);
 				}
-				try {
-					pattern.initialise(mWorld);
-				} catch (PatternFormatException e) {
-					e.printStackTrace();
-				}
+				pattern.initialise(mWorld);
 				print();
 			}
 
 		}
 	}
 
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) throws IOException, PatternFormatException {
 
 		if (args.length != 1) {
 			System.out.println("Usage: java GameOfLife <path/url to store>");

@@ -15,7 +15,6 @@ public class MaxCharHeap implements MaxCharHeapInterface {
             char child = mHeap[i];
             char parent = mHeap[parentIndex];
             if(Character.compare(child, parent) > 0){
-               char temp = child;
                mHeap[i] = parent;
                mHeap[parentIndex] = child;
             }

@@ -1,21 +1,21 @@
 package uk.ac.cam.cl.mlrd.testing;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.io.IOException;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Comparator;
-import java.util.Set;
-
-//TODO: Replace with your package.
 import uk.ac.cam.cl.mlrd.exercises.social_networks.Exercise11;
 import uk.ac.cam.cl.mlrd.exercises.social_networks.IExercise11;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+//TODO: Replace with your package.
+
 public class Exercise11Tester {
-    static final Path graphFile = Paths.get("data/network_files/simple_network.edges");
+    static final Path graphFile = Paths.get("data/network_files/supo-1.edges");
 
     public static void main(String[] args) throws IOException {
 	IExercise11 implementation = new Exercise11();
